@@ -1,0 +1,83 @@
+[class^="tile-"]{
+  position: relative;
+  display: grid;
+  transition: all cubic-bezier(0.25,0.1,0.25,1) 2s;
+  &.hidden > *{
+    visibility: hidden;
+  }
+  .helper{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    top: 20%;
+    color: red;
+  }
+}
+[class^="image-"]{
+  width: 100%;
+}
+.place-00{
+    grid-column: 1;
+    grid-row: 1; 
+}
+.place-01{
+  grid-column: 1;
+  grid-row: 2; 
+}
+.place-02{
+  grid-column: 1;
+  grid-row: 3; 
+}
+.place-03{
+  grid-column: 1;
+  grid-row: 4; 
+}
+.place-10{
+  grid-column: 2;
+  grid-row: 1; 
+}
+.place-11{
+grid-column: 2;
+grid-row: 2; 
+}
+.place-12{
+grid-column: 2;
+grid-row: 3; 
+}
+.place-13{
+grid-column: 2;
+grid-row: 4; 
+}
+.place-20{
+  grid-column: 3;
+  grid-row: 1; 
+}
+.place-21{
+grid-column: 3;
+grid-row: 2; 
+}
+.place-22{
+grid-column: 3;
+grid-row: 3; 
+}
+.place-23{
+grid-column: 3;
+grid-row: 4; 
+}
+.place-30{
+  grid-column: 4;
+  grid-row: 1; 
+}
+.place-31{
+grid-column: 4;
+grid-row: 2; 
+}
+.place-32{
+grid-column: 4;
+grid-row: 3; 
+}
+.place-33{
+grid-column: 4;
+grid-row: 4; 
+}

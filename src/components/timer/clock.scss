@@ -1,0 +1,11 @@
+.app_clock{
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .clock__time, {
+    text-align: center;
+  }
+}
