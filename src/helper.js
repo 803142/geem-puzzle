@@ -72,4 +72,6 @@ const findTargetNode = (target, neededTarget, stopTrigger) => {
   return pointTarget;
 };
 
-export { simpleTag, apiMaker, importAll, findTargetNode, addStyle, shuffle };
+const qs = (selector, scope) => (scope || document).querySelector(selector);
+
+export { simpleTag, apiMaker, importAll, findTargetNode, addStyle, shuffle, qs };

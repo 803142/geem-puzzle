@@ -1,7 +1,12 @@
+import { importAll } from '../../helper';
+
+const images = importAll(require.context('../../assets/images/full/', false, /\.(png|jpe?g|svg)$/));
+
 class Storage {
   constructor() {
     this.storage = {};
     this.appName = 'app';
+    this.images = images;
   }
 
   toLocalStorage() {
@@ -11,8 +16,12 @@ class Storage {
 
   getLocalStorage() {
     const myStorage = window.localStorage;
-    const { momentum } = myStorage;
-    if (momentum) this.storage = JSON.parse(momentum);
+    const storage = myStorage[this.appName];
+    if (storage) {
+      this.storage = JSON.parse(storage);
+      return true;
+    }
+    return false;
   }
 
   getStorage() {
@@ -20,7 +29,7 @@ class Storage {
   }
 
   setAppName(appName) {
-    this.appName = `${this.appName}${appName}`;
+    this.appName = `${appName}`;
   }
 }
 

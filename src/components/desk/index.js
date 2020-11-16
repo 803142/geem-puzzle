@@ -3,7 +3,7 @@ import Component from '../component';
 import Tile from './tile';
 import ImageCutter from './imageCutter';
 import { ifCanMoove, isResolveble } from './helper/helper';
-import { simpleTag, addStyle, findTargetNode, shuffle /* , importAll */ } from '../../helper';
+import { simpleTag, addStyle, findTargetNode, shuffle, qs } from '../../helper';
 
 class Desk extends Component {
   constructor() {
@@ -13,7 +13,15 @@ class Desk extends Component {
     this.imageCutter = new ImageCutter();
   }
 
-  init(sizeDesk) {
+  init(appTag) {
+    this.appTag = appTag;
+    this.events.addEventList('new-game', [this.setSettings.bind(this), this.render.bind(this)]);
+    this.setSettings();
+  }
+
+  setSettings() {
+    const { sizeDesk } = this.state.storage.settings;
+
     const imageEmpty = new Image();
     this.desk = Array(sizeDesk).fill(Array(sizeDesk).fill(imageEmpty));
 
@@ -30,13 +38,16 @@ class Desk extends Component {
     );
   }
 
-  render(imagePuzle, sizeDesk) {
+  render() {
+    if (qs('.desk')) qs('.desk').remove();
+    const imagePuzle = this.state.images[this.state.storage.settings.image];
+    const { sizeDesk } = this.state.storage.settings;
     const image = new Image();
 
     image.src = imagePuzle;
 
     const desk = simpleTag({ classTag: 'desk' });
-    document.body.appendChild(desk);
+    this.appTag.appendChild(desk);
 
     image.onload = () => {
       this.imageCutter.init(image, sizeDesk);
@@ -59,20 +70,18 @@ class Desk extends Component {
         tileImage.tag.classList.toggle(puzleArray[index]);
       });
     };
+
     desk.addEventListener('click', e => {
       if (findTargetNode(e.target, 'DIV', 'DIV')) {
         const findTile = findTargetNode(e.target, 'DIV', 'DIV');
-        console.log(findTargetNode(e.target, 'DIV', 'DIV'));
         const [imageClass, tileClass] = findTargetNode(e.target, 'DIV', 'DIV').classList;
         const possibleMoove = ifCanMoove(imageClass, tileClass, sizeDesk);
 
         if (possibleMoove) {
-          console.log(this.events);
           this.events.dispatchEvent('newMoove');
           findTile.classList.toggle(tileClass);
           findTile.classList.toggle(possibleMoove);
           document.querySelector(`.tile-${sizeDesk * sizeDesk}`).classList.toggle(possibleMoove);
-
           document.querySelector(`.tile-${sizeDesk * sizeDesk}`).classList.toggle(tileClass);
         }
       }

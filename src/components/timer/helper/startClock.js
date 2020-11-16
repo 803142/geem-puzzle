@@ -5,19 +5,18 @@ const startClock = (here, date) => {
   const clockElement = document.querySelector(`.${TIMETAG.classTag}`);
   const step = () => {
     let today = new Date();
+    const { state } = here;
     today = new Date(today.getTime() - date);
-    const hours = today.getHours();
     let minutes = today.getMinutes();
     let seconds = today.getSeconds();
     minutes = checkTime(minutes);
     seconds = checkTime(seconds);
-    const { state } = here;
-    if (state.storage.haur !== hours) {
-      state.storage.haur = hours;
-      state.toLocalStorage();
-    }
 
-    clockElement.innerHTML = `${minutes}:${seconds}`;
+    const timeString = `${minutes}:${seconds}`;
+    state.storage.gameInProgress.time = timeString;
+    state.storage.gameInProgress.timeD = today;
+
+    clockElement.innerHTML = timeString;
   };
 
   const timeOut = setInterval(step, 1000);

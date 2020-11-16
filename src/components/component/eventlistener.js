@@ -3,11 +3,16 @@ class EventEmitter {
     this.events = {};
   }
 
-  addEventListener(event, callback) {
+  addEventList(event, callback) {
     if (event === undefined || callback === undefined) {
       return false;
     }
-    this.events[event] = [...callback];
+    if (this.events[event]) {
+      this.events[event] = [...this.events[event], ...callback];
+    } else {
+      this.events[event] = [...callback];
+    }
+
     return false;
   }
 

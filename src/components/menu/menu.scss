@@ -1,0 +1,18 @@
+.pause{
+  position: absolute;
+  bottom: .5rem;
+  right: .5rem;
+}
+
+.menu-container {
+  position: absolute;
+  bottom: 0;
+  width: 99%;
+  margin: 0;
+  .hidden{
+    visibility: hidden;
+  }
+}
+.menu-bar{
+  display: grid;
+}

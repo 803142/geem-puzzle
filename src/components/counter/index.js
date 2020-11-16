@@ -12,21 +12,23 @@ class Counter extends Component {
   }
 
   init() {
-    this.events.addEventListener('newMoove', [this.newMoove]);
-    console.log(this.state);
+    this.events.addEventList('newMoove', [this.newMoove]);
+    this.events.addEventList('new-game', [this.new.bind(this)]);
   }
 
-  render() {
-    document.body.appendChild(this.tag);
+  render(appTag) {
+    appTag.appendChild(this.tag);
     this.tag.appendChild(this.score);
   }
 
   new(score = '000') {
     this.score.innerHTML = score;
+    this.state.storage.gameInProgress.score = score;
   }
 
   addScore() {
     const current = this.score.innerHTML;
+    this.state.storage.gameInProgress.score = counterNormalaize(current);
     this.score.innerHTML = counterNormalaize(current);
   }
 }

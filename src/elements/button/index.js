@@ -1,25 +1,20 @@
 import { simpleTag } from '../../helper';
 
 class Button {
-  constructor(name, action) {
+  constructor(name) {
     this.name = name;
-    this.action = action;
+    this.tag = this.render();
   }
 
   render() {
     this.buttonTag = simpleTag(
       {
         tagName: 'button',
-        className: `btn ${this.name}`,
+        classTag: `btn ${this.name}`,
       },
       this.name
     );
-    this.setAction();
     return this.buttonTag;
-  }
-
-  setAction() {
-    this.buttonTag.onclick = this.action;
   }
 
   setIcon(icon) {

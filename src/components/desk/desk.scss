@@ -7,10 +7,12 @@
   }
   .helper{
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    text-align: center;
+    height: 100%;
     margin: 0;
-    top: 20%;
     color: red;
   }
 }

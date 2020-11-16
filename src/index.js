@@ -1,39 +1,24 @@
-import './assets/fonts/neucher.scss';
 import './style.scss';
-import Clock from './components/timer';
-import Desk from './components/desk';
-import Menu from './components/menu';
+import './assets/fonts/neucher.scss';
 
-import { simpleTag, importAll } from './helper';
-import Counter from './components/counter';
+import App from './app';
 
-const images = importAll(require.context('./assets/images/full/', false, /\.(png|jpe?g|svg)$/));
-// require.context('./assets/audio/', false, /\.(mp3)$/);
+import { simpleTag, qs } from './helper';
 
-const appTag = simpleTag({
-  tagName: 'div',
-  classTag: 'gem-puzzle',
-});
-document.body.appendChild(appTag);
+window.onload = async () => {
+  let appTag = qs('.gem-puzzle');
+  const script = qs('script');
 
-const timer = new Clock();
+  if (!appTag) {
+    appTag = simpleTag({
+      tagName: 'div',
+      classTag: 'gem-puzzle',
+    });
+    document.body.insertBefore(appTag, script);
+  }
 
-timer.render(appTag);
-
-timer.start();
-
-const desk = new Desk();
-
-desk.init(4);
-
-desk.render(images[23], 4);
-
-const menu = new Menu();
-
-menu.render();
-
-const counter = new Counter();
-
-counter.init();
-
-counter.render();
+  const app = new App(appTag);
+  app.init();
+  app.render();
+  app.start();
+};
